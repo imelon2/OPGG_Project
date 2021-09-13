@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:mariadb://3.36.67.156/opgg?characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: wnddkdwjdqhcjfl1
+---
+mybatis:
+  mapper-locations: mapper/*.xml
+
+---
+spring:
+  devtools:
+    livereload:
+      enabled: true
+
+  mvc:
+    view:
+      prefix: /jsp/
+      suffix: .jsp
+---
+server:
+  port: 8080
+  #httpport: 80
+
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    session:
+      timeout: 3600s
+      cookie:
+        name: JSESSIONIDBSS
+
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+
