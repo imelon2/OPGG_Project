@@ -1,10 +1,9 @@
 import { data } from "jquery";
 
+// 챔피언 리스트 업데이트
 export class getCampNameId {
 
-
-
-   test() {
+   updateChampList() {
         var settings = {
             "url": "http://ddragon.leagueoflegends.com/cdn/11.18.1/data/en_US/champion.json?data",
             "method": "GET",

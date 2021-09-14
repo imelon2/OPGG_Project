@@ -6,49 +6,137 @@ import { getCampNameId } from "../../oop/getCampNameId";
 
 
 const SectionCenter = () => {
-    const inputRef:any = React.createRef();
+    const [champName,setChampName] = React.useState();
+    const inputRef : React.MutableRefObject<any>= React.useRef();
+
     const gettest = (event:any) => {
-        event.preventDefault(event);
+         event.preventDefault(event);
 
-        // const name = inputRef.current.value;
-        // let b =  new getGameData(name);
-        // b.dataAPI().then(function(data : number) {
-        //     console.log(data);
-        // });  
-        let test = new getCampNameId();
-        let testLog = test.test();
-        console.log(testLog);
-    }
-
-        
-
+        const name: number = inputRef.current.value;
+        let DataApi =  new getGameData(name);
+        DataApi.dataAPI().then(function(data) {
+            console.log(data);
+        });  
+        // let test = new getCampNameId();
+        // let testLog = test.updateChampList();
+    };
     return (
         <div>
             <section className="center">
                 <div className="background">
-                    <h2>Search Data</h2>
-                        <form className="gameID" onSubmit={gettest}>
-                        <input ref={inputRef} type="text" placeholder="게임아이디"/>
-                        <button className="add-button">add</button>
-                        </form>
-                    <div className="team1">
-                        <div className="_team1">
-                            <h1>1팀</h1>
-                            <div className="participant" id="ID1"></div>
-                            <div className="participant" id="ID2"></div>
-                            <div className="participant" id="ID3"></div>
-                            <div className="participant" id="ID4"></div>
-                            <div className="participant" id="ID5"></div>
+                    <div className="teamNav">
+                        <div>TEAM 1</div>
+                        <div>win</div>
+                        <div>
+                            <form className="gameID" onSubmit={gettest}>    
+                            <input ref={inputRef} type="text" placeholder="게임아이디"/>
+                            <button>Search GameData</button>
+                            </form>
+                        </div>
+                        <div>lose</div>
+                        <div>TEAM 2</div>
+                    </div>
+                    <div className="totalPlayers">
+                        <div className="_totalPlayers">
+                            <div className="players">
+                                <table>
+                                    <tr>
+                                        <div className="team1">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                        <div className="team2">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                            <span>1995.10.01</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div className="team1">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                        <div className="team2">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div className="team1">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                        <div className="team2">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                            <span>1995.10.01</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div className="team1">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                        <div className="team2">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                            <span>1995.10.01</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div className="team1">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                                <span style={{width: "70%"}}>75%</span>
+                                            </div>
+                                        </div>
+                                        <div className="team2">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
+                                            <div className="con">
+                                                <input type="text" placeholder="유저명을 입력해주세여" />
+                                                <p>K/D/A</p>
+                                            <span>1995.10.01</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div className="team2">
-                        <div className="_team2">
-                            <h1>2팀</h1>
-                            <div className="participant" id="ID6"></div>
-                            <div className="participant" id="ID7"></div>
-                            <div className="participant" id="ID8"></div>
-                            <div className="participant" id="ID9"></div>
-                            <div className="participant" id="ID10"></div>
+                    <div className="gameStats">
+                        <div className="_gameStats">
+
                         </div>
                     </div>
                 </div> 

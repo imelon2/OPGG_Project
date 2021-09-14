@@ -12,7 +12,6 @@ class MainPage extends React.Component<HelloProps,{}> {
     render() {
         return (
             <>
-            <Navbar/>
             <SectionCenter/>
             </>
         );
