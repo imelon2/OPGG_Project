@@ -38,4 +38,10 @@ public class MyController {
         service.updateChampList(vo);
     }
 
+    @PostMapping(value = "/getdata/champNameList", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public void getChampNamelistFromId(@RequestBody ArrayList<String> vo) {
+        log.info(vo);
+    }
+
 }
