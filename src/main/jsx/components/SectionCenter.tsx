@@ -4,45 +4,106 @@ import * as $ from "jquery";
 import { getGameData } from "../../oop/getGameData";
 import { getCampNameId } from "../../oop/getCampNameId";
 import { getCampNameFromId } from "../../oop/getCampNameFromId";
+import PlayerList from "./playerList/PlayerList";
+import { champNameReturnReg } from "../../oop/champNameReturnReg";
 
 
 const SectionCenter = () => {
-    const [champName,setChampName] = React.useState();
-    const [champUrl, setChampUrl] = React.useState();
-    // "http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/" + {champName} + ".png"
+    const [champImgUrl,setChampImgUrl] = React.useState<string[]>([]);
+    const [champData, setChampData] = React.useState<any[]>([]);
+
     const inputRef : React.MutableRefObject<any>= React.useRef();
-    const idRef = React.useRef;
+
 
     const _getGameData = (event:any) => {
          event.preventDefault(event);
         //  게임ID가져오기
         const gameID: number = inputRef.current.value;
-
+        
         let DataApi =  new getGameData(gameID);
         DataApi.dataAPI().then(function(data : any[]) {
             console.log(data);
-            let champIdList : Number|String[] = [];
-
+            // champId로 영어이름 갖고오기
+            let champIdList = [];
+            let playerDataList : any[] = [];
             for (let i = 0; i < 10; i++) {
+                // 챔프이름 구별
                 let champId = data[i].championId;
-                champIdList.push(champId);
+                let _champData ={
+                    win : Boolean,
+                    champK:Number,
+                    champD:Number,
+                    champA:Number,
+                    gold: Number,
+                    totalDamage: Number
             }
 
-            console.log(champIdList);
-            
-            // champId로 영어이름 갖고오기
-            getCampNameFromId(champIdList);
+                champIdList.push(champId);
+                // 챔프 KDA 구별
+                _champData.win = data[i].win;
+                _champData.champK = data[i].kills;
+                _champData.champD = data[i].deaths;
+                _champData.champA = data[i].assists;
+                _champData.gold = data[i].goldEarned;
+                _champData.totalDamage = data[i].totalDamageDealtToChampions;
 
-            // for (let i = 0 ; i < 10; i++)  {
-            //     $("#participantId"+ i).val()
-            // }
+                playerDataList.push(_champData)
+            }
+            getCampNameFromId(champIdList).then((data : any[]) => {
+                //챔프 이름 정규화 리턴
+                let champUrl = champNameReturnReg(data);
+                // 챔프 이미지 보여주기
+                setChampImgUrl(champUrl);
+            });   
+            //플레이어 KDA보여주기
+                setChampData(playerDataList);
+                console.log(playerDataList);
+                
 
+            // 딜그래프 전환
+                //최댓값 호출
+                const damageArr : number[] = [];
+                let maxNum:number = 0;
+                for (let i = 0; i < playerDataList.length ; i++) {
+                    const _damage = playerDataList[i].totalDamage;   
+                    damageArr.push(_damage);  
+                }
 
- 
-            
+                for(var i = 0; i < damageArr.length; i++) {
+                    // maxNum의 값과 현재 값을 비교해서 maxNum값을 가장 큰 값으로 유지
+                    if (maxNum < damageArr[i]) {
+                        maxNum = damageArr[i];
+                    }
+                }
+                // 그래프max 값 결정
+                let num = maxNum.toString();
+                let barMax = Math.ceil(maxNum/(Math.pow(10,num.length -1)))*(Math.pow(10,num.length -1));
+
+                // 플레이어 각자 딜량 배열
+                let perDamagePercent = [];
+                for(let a of damageArr){
+                    let perDamage = a/(barMax*0.01);
+
+                    perDamagePercent.push(perDamage.toFixed(0));
+                }
+
+                //딜 그래프 css 바꾸기
+                for(let i = 1; i < perDamagePercent.length + 1; i++) {
+                    $("#bar"+[i]+"-change").css('width',perDamagePercent[i-1]+'%');
+                    $("#bar"+[i]+"-change").attr("id","bar"+[i]); 
+                }
+                for(let i = 1; i < perDamagePercent.length + 1; i++) {
+                        document.documentElement.style.setProperty('--my-start'+[i],perDamagePercent[i-1]+'%');
+                    }
+                setTimeout(() => {
+                    for(let i = 1; i < perDamagePercent.length + 1; i++) {
+                    $("#bar"+[i]).attr("id","bar"+[i]+"-change"); 
+                    }
+                }, 1);
+
         });  
-
     };
+
     return (
         <div>
             <section className="center">
@@ -59,104 +120,7 @@ const SectionCenter = () => {
                         <div>lose</div>
                         <div>TEAM 2</div>
                     </div>
-                    <div className="totalPlayers">
-                        <div className="_totalPlayers">
-                            <div className="players">
-                                <table>
-                                    <tr>
-                                        <div className="team1" id="participantId0">
-                                            <img src={champUrl} />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                        <div className="team2" id="participantId5">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                            <span>1995.10.01</span>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div className="team1" id="participantId1">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                        <div className="team2" id="participantId6">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div className="team1" id="participantId2">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                        <div className="team2" id="participantId7">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                            <span>1995.10.01</span>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div className="team1" id="participantId3">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                        <div className="team2" id="participantId8">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                            <span>1995.10.01</span>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div className="team1" id="participantId4">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                                <span style={{width: "70%"}}>75%</span>
-                                            </div>
-                                        </div>
-                                        <div className="team2" id="participantId9">
-                                            <img src="http://ddragon.leagueoflegends.com/cdn/11.18.1/img/champion/Aatrox.png" />
-                                            <div className="con">
-                                                <input type="text" placeholder="유저명을 입력해주세여" />
-                                                <p>K/D/A</p>
-                                            <span>1995.10.01</span>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <PlayerList champImgUrl={...champImgUrl} champData={...champData} />
                     <div className="gameStats">
                         <div className="_gameStats">
 

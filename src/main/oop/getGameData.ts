@@ -10,7 +10,7 @@ export class getGameData {
 
     dataAPI() {
         var settings = {
-            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-3bd9d7d3-bcd5-4441-9496-368a6e323b5f",
+            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-0a75f26e-ff9d-4ae1-a160-47c1ad24a422",
             "method": "GET",
             "timeout": 0,
           };
@@ -18,6 +18,7 @@ export class getGameData {
             $.ajax(settings).done(function (response) {
              
               let forData = [] ;
+
               for (let i = 0; i < 10; i++) {
                 // 플레이어 정보
                 let playInfo = 
@@ -30,7 +31,7 @@ export class getGameData {
                   assists : Number,
                   totalDamageDealtToChampions : Number,
                   goldEarned : Number,
-                  totalSC : Number
+                  totalCS : Number
                 }
 
                 playInfo.participantId = response.participants[i].participantId
@@ -44,7 +45,7 @@ export class getGameData {
                 playInfo.goldEarned =  response.participants[i].stats.goldEarned;
                 let scMinions  = response.participants[i].stats.totalMinionsKilled;
                 let scNeutralMinios = response.participants[i].stats.neutralMinionsKilled;
-                playInfo.totalSC = scMinions + scNeutralMinios;
+                playInfo.totalCS = scMinions + scNeutralMinios;
 
                 forData.push(playInfo);
               }
@@ -63,6 +64,7 @@ export class getGameData {
 
               // 팀 정보
               for (let i = 0; i < 2; i++) {
+                
                 let matchTeamInfo = {
                   teamId : Number,
                   win : String,
@@ -79,6 +81,7 @@ export class getGameData {
                 }
                 _bans.championId= response.teams[i].bans[j].championId !== undefined ? response.teams[i].bans[j].championId : "none";
                 matchTeamInfo.bans.push(_bans);
+                
               }
               
               forData.push(matchTeamInfo);
