@@ -1,7 +1,31 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+a:active {
+    color: black;
+    text-decoration: none;
+}
 
 * {
+    font-family: 'SBAggroB';
     margin: 0;
     padding: 0;
     list-style: none;
@@ -35,21 +59,29 @@ main {
 
 /* navbar */
 nav {
-    position: relative;
-    float: right;
-    top: 25px;
-    width: 1500px;
-    height: 80px;
+    position: absolute;
+    top: -60px;
+    z-index: 1;
+    right: 0px;
+    width: 1000px;
+    height: 90px;
     display: flex;
     background-color: #45443D;
-    opacity: 0.7;
+    opacity: 0.9;
+    transition: all 0.5s;
+    border-radius: 0px 0px 0px 250px;
 }
 
 nav>div {
-    margin-left: 30px;
+    margin-left: 35px;
+    margin-top: 2.5%;
     width: 200px;
     height: 80px;
-    border: 2px solid white;
+    text-align: center;
+
+}
+nav .nav1 {
+    margin-left: 7%;
 }
 
 /* Section Center Nav */
@@ -66,16 +98,19 @@ section .background .teamNav {
     border-top: 2px solid black;
 }
 
+section .background .teamNav div {
+    padding-top: 5px;
+}
 section .background .teamNav div:nth-child(1){
  
     width: 33%;
-    padding-top: 10px;
+    padding-top: 18px;
     border-right: 1px solid;
 }
 section .background .teamNav div:nth-child(2){
  
     width: 11%;
-    padding-top: 10px;
+    padding-top: 18px;
     border-right: 1px solid;
 }
 section .background .teamNav div:nth-child(3){
@@ -95,17 +130,36 @@ section .background .teamNav div:nth-child(3) form button{
 section .background .teamNav div:nth-child(4){
  
     width: 11%;
-    padding-top: 10px;
+    padding-top: 18px;
     border-left: 1px solid;
 }
 section .background .teamNav div:nth-child(5){
  
     width: 33%;
-    padding-top: 10px;
+    padding-top: 18px;
     border-left: 1px solid;
 }
 
-/* Section Center */
+/* saveDataNav */
+.saveDataBar {
+    position: relative;
+    float: left;
+    width: 40%;
+    height: 150px;
+    margin: 0 auto;
+    /* border: 1px solid; */
+    right: -30%;
+    top: -10%;
+    background-color: #414B54;
+    opacity: 0.9;
+    border-radius: 250px 250px 0px 0px;
+    margin-top: -64px;
+    text-align: center;
+    margin-top: 50px;
+    transition: all 1s;
+}
+
+/* Search Custom Game */
 .center {
     position: relative;
     margin: 0 auto;
@@ -115,13 +169,13 @@ section .background .teamNav div:nth-child(5){
 }
 
 section .background {
-    margin: 0 auto;
     width: 100%;
     height: 100%;
     background: rgb(220,100,198);
     background: linear-gradient(113deg, rgba(220,100,198,1) 22%, rgba(102,150,219,0.8267682072829132) 78%);
     opacity: 0.8;
     z-index: 1;
+    overflow: hidden;
 }
 
 section .background .totalPlayers {
@@ -129,7 +183,8 @@ section .background .totalPlayers {
     position: relative;
     width: 50%;
     height: 700px;
-    transition: all 0.5s;
+    opacity: 0;
+    transition: all 1s;
 
 }
 section .background .totalPlayers ._totalPlayers {
@@ -157,8 +212,9 @@ section .background .totalPlayers ._totalPlayers .players ul li {
 section .background .totalPlayers ._totalPlayers .players .team1{
     text-align: left;
     float: left;
-    width: 45%;
+    width: 44.9%;
     height: 100%;
+    border-right: 1px solid black;
 }
 
 section .background .totalPlayers ._totalPlayers .players .team1 .con {
@@ -171,7 +227,7 @@ section .background .totalPlayers ._totalPlayers .players .team2 .con {
 section .background .totalPlayers ._totalPlayers .players .team2{
     text-align: right;
     float: left;
-    width: 45%;
+    width: 44.9%;
     height: 100%;
 }
 section .background .totalPlayers ._totalPlayers .players .team1 img {
@@ -201,122 +257,112 @@ section .background .gameStats {
     width: 300px;
 }
 .graph #bar1-change {
-    display: block;
+    display: none;
     float: left;
     width: 0px;
     height: 18px;
     line-height: -3px;
     text-align: right;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack1 2s 1;
 }
 .graph #bar2-change{
-    display: block;
+    display: none;
     float: left;
     width: 0px;
     height: 18px;
     line-height: -3px;
     text-align: right;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack2 2s 1;
 }
 .graph #bar3-change{
-    display: block;
+    display: none;
     float: left;
     width: 0px;
     height: 18px;
     line-height: -3px;
     text-align: right;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack3 2s 1;
 }
 .graph #bar4-change{
-    display: block;
+    display: none;
     float: left;
     width: 0px;
     height: 18px;
     line-height: -3px;
     text-align: right;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack4 2s 1;
 }
 .graph #bar5-change{
-    display: block;
+    display: none;
     float: left;
     width: 0px;
     height: 18px;
     line-height: -3px;
     text-align: right;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack5 2s 1;
 }
 .graph #bar6-change{
-    display: block;
+    display: none;
     text-align: left;
     float: right;
     width: 0px;
     height: 18px;
     line-height: -3px;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack6 2s 1;
 }
 .graph #bar7-change{
-    display: block;
+    display: none;
     text-align: left;
     float: right;
     width: 0px;
     height: 18px;
     line-height: -3px;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack7 2s 1;
 }
 .graph #bar8-change{
-    display: block;
+    display: none;
     text-align: left;
     float: right;
     width: 0px;
     height: 18px;
     line-height: -3px;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack8 2s 1;
 }
 .graph #bar9-change{
-    display: block;
+    display: none;
     text-align: left;
     float: right;
     width: 0px;
     height: 18px;
     line-height: -3px;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack9 2s 1;
 }
 .graph #bar10-change {
-    display: block;
+    display: none;
     text-align: left;
     float: right;
     width: 0px;
     height: 18px;
     line-height: -3px;
     background: pink;
-    border-radius: 40px;
     padding: 0 10px;
     animation: stack10 2s 1;
 }
@@ -336,51 +382,41 @@ section .background .gameStats {
 
 @keyframes stack1 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start1);}
 }
 @keyframes stack2 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start2);}
 }
 @keyframes stack3 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start3);}
 }
 @keyframes stack4 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start4);}
 }
 @keyframes stack5 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start5);}
 }
 @keyframes stack6 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start6);}
 }
 @keyframes stack7 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start7);}
 }
 @keyframes stack8 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start8);}
 }
 @keyframes stack9 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start9);}
 }
 @keyframes stack10 {
     0% { width: 0; color: rgba(255, 255, 255, 0);}
-    100% { color: rgba(255, 255, 255, 1);}
     100% { width: var(--my-start10);}
 }

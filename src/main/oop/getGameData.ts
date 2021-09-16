@@ -10,7 +10,7 @@ export class getGameData {
 
     dataAPI() {
         var settings = {
-            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-0a75f26e-ff9d-4ae1-a160-47c1ad24a422",
+            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-cf19086c-1134-4ca3-bcba-9f626157fb70",
             "method": "GET",
             "timeout": 0,
           };
@@ -23,6 +23,7 @@ export class getGameData {
                 // 플레이어 정보
                 let playInfo = 
                 { participantId : Number,
+                  participant : String,
                   teamId : Number,
                   championId : Number,
                   win : String,
@@ -35,6 +36,7 @@ export class getGameData {
                 }
 
                 playInfo.participantId = response.participants[i].participantId
+                playInfo.participant = null
                 playInfo.teamId = response.participants[i].teamId
                 playInfo.championId = response.participants[i].championId
                 playInfo.win = response.participants[i].stats.win

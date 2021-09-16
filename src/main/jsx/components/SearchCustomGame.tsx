@@ -2,15 +2,21 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import { getGameData } from "../../oop/getGameData";
-import { getCampNameId } from "../../oop/getCampNameId";
 import { getCampNameFromId } from "../../oop/getCampNameFromId";
 import PlayerList from "./playerList/PlayerList";
 import { champNameReturnReg } from "../../oop/champNameReturnReg";
 
 
-const SectionCenter = () => {
+declare global {
+    interface Window {
+        FB:any;
+    }
+}
+
+const SearchCustomGame = () => {
     const [champImgUrl,setChampImgUrl] = React.useState<string[]>([]);
     const [champData, setChampData] = React.useState<any[]>([]);
+
 
     const inputRef : React.MutableRefObject<any>= React.useRef();
 
@@ -22,6 +28,7 @@ const SectionCenter = () => {
         
         let DataApi =  new getGameData(gameID);
         DataApi.dataAPI().then(function(data : any[]) {
+
             console.log(data);
             // champId로 영어이름 갖고오기
             let champIdList = [];
@@ -29,18 +36,28 @@ const SectionCenter = () => {
             for (let i = 0; i < 10; i++) {
                 // 챔프이름 구별
                 let champId = data[i].championId;
+                champIdList.push(champId);
+
+                // 챔프 KDA 구별
                 let _champData ={
+                    gameId : Number,
+                    participant : String,
+                    gameCreation : Number,
+                    champ : String,
+                    title : String,
                     win : Boolean,
                     champK:Number,
                     champD:Number,
                     champA:Number,
                     gold: Number,
                     totalDamage: Number
-            }
-
-                champIdList.push(champId);
-                // 챔프 KDA 구별
+                }
+                _champData.gameId = data[10].gameId
+                _champData.participant = null;
+                _champData.gameCreation = data[10].gameCreation;
+                _champData.title = null;
                 _champData.win = data[i].win;
+                _champData.champ = data[i].championId;
                 _champData.champK = data[i].kills;
                 _champData.champD = data[i].deaths;
                 _champData.champA = data[i].assists;
@@ -49,16 +66,19 @@ const SectionCenter = () => {
 
                 playerDataList.push(_champData)
             }
+            // 챔프id -> 챔프영어이름
             getCampNameFromId(champIdList).then((data : any[]) => {
-                //챔프 이름 정규화 리턴
-                let champUrl = champNameReturnReg(data);
+
+                let champReg = new champNameReturnReg();
+                //정규화된 챔프이름[] 리턴
+                let champUrl = champReg.champNameReturnRegUrl(data);
+
                 // 챔프 이미지 보여주기
                 setChampImgUrl(champUrl);
             });   
-            //플레이어 KDA보여주기
+                //플레이어 KDA보여주기
                 setChampData(playerDataList);
-                console.log(playerDataList);
-                
+
 
             // 딜그래프 전환
                 //최댓값 호출
@@ -89,7 +109,8 @@ const SectionCenter = () => {
 
                 //딜 그래프 css 바꾸기
                 for(let i = 1; i < perDamagePercent.length + 1; i++) {
-                    $("#bar"+[i]+"-change").css('width',perDamagePercent[i-1]+'%');
+                    $("#bar"+[i]+"-change").css('width',perDamagePercent[i-1]+'%')
+                    $("#bar"+[i]+"-change").show();
                     $("#bar"+[i]+"-change").attr("id","bar"+[i]); 
                 }
                 for(let i = 1; i < perDamagePercent.length + 1; i++) {
@@ -101,35 +122,40 @@ const SectionCenter = () => {
                     }
                 }, 1);
 
+
+                //승패결과값 리턴
+                if(data[11].win == 'Win'){
+                    $('.result1').text("Win");
+                    $('.result2').text("Lose");
+                } else {
+                    $('.result1').text("Lose");
+                    $('.result2').text("Win");
+                }
+
+                //검색 후 결과 애니메이션
+                $('.totalPlayers').css("opacity", "10");
+
+
         });  
     };
 
     return (
-        <div>
-            <section className="center">
-                <div className="background">
+        <>
                     <div className="teamNav">
                         <div>TEAM 1</div>
-                        <div>win</div>
+                        <div className="result1"></div>
                         <div>
                             <form className="gameID" onSubmit={_getGameData}>    
                             <input ref={inputRef} type="text" placeholder="게임아이디"/>
                             <button>Search GameData</button>
                             </form>
                         </div>
-                        <div>lose</div>
+                        <div className="result2"></div>
                         <div>TEAM 2</div>
                     </div>
                     <PlayerList champImgUrl={...champImgUrl} champData={...champData} />
-                    <div className="gameStats">
-                        <div className="_gameStats">
-
-                        </div>
-                    </div>
-                </div> 
-            </section>
-        </div>
+        </>
     );
 }
 
-export default SectionCenter;
+export default SearchCustomGame;

@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import no4gift.opgg.domain.ChampIdAndNameVO;
 import no4gift.opgg.domain.ChampListVO;
+import no4gift.opgg.domain.saveData;
 import no4gift.opgg.service.MyService;
 
 @Controller
@@ -26,7 +27,7 @@ public class MyController {
     @Autowired
     private MyService service;
 
-    @GetMapping("/{name}.html")
+    @GetMapping("/{name}")
     public String page(@PathVariable String name, Model model) {
         model.addAttribute("pageName", name);
         return "index";
@@ -42,6 +43,12 @@ public class MyController {
     @ResponseBody
     public List<String> getChampNamelistFromId(@RequestBody ArrayList<Integer> vo) {
         return service.getChampNamelistFromId(vo);
+    }
+
+    @PostMapping(value = "/getdata/saveData", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public void saveData(@RequestBody ArrayList<saveData> vo) {
+        log.info(vo);
     }
 
 }
