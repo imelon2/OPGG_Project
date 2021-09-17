@@ -10,7 +10,7 @@
 	<groupId>no4gift</groupId>
 	<artifactId>opgg</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>opgg</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
