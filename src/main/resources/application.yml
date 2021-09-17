@@ -9,7 +9,6 @@ spring:
 ---
 mybatis:
   mapper-locations: mapper/*.xml
-
 ---
 spring:
   devtools:
@@ -28,6 +27,7 @@ server:
   tomcat:
     uri-encoding: UTF-8
   servlet:
+    context-path: /wonhyeok
     session:
       timeout: 3600s
       cookie:
@@ -37,5 +37,3 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-
-
