@@ -29,4 +29,16 @@ public class MyServiceImpl implements MyService {
 
     }
 
+    @Override
+    public void saveData(ArrayList<no4gift.opgg.domain.saveData> vo) {
+        mapper.saveData(vo);
+
+    }
+
+    @Override
+    public Long checkDup(Long id) {
+
+        return mapper.checkDup(id);
+    }
+
 }

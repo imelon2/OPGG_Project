@@ -7,7 +7,7 @@ export function getCampNameFromId(champIdList : Number|String[]) {
             url: "getdata/champNameList",
             data: JSON.stringify(champIdList),
             contentType: "application/json"
-        }).done(function(data) {
+        }).done(function(data: any[]) {
             resolve(data);
         })
 

@@ -48,7 +48,14 @@ public class MyController {
     @PostMapping(value = "/getdata/saveData", produces = { "application/json; charset=utf-8" })
     @ResponseBody
     public void saveData(@RequestBody ArrayList<saveData> vo) {
-        log.info(vo);
+        service.saveData(vo);
     }
 
+    @PostMapping(value = "/getdata/checkDup", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public Long checkDup(@RequestBody Long id) {
+
+        log.info(id);
+        return service.checkDup(id);
+    }
 }

@@ -10,7 +10,7 @@ export class getGameData {
 
     dataAPI() {
         var settings = {
-            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-cf19086c-1134-4ca3-bcba-9f626157fb70",
+            "url": "https://kr.api.riotgames.com/lol/match/v4/matches/"+this.gameID+"?api_key=RGAPI-d5714ba2-0581-4ee2-84e0-18f823e1e8d9",
             "method": "GET",
             "timeout": 0,
           };

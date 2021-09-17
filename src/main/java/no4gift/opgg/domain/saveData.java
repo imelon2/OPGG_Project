@@ -1,7 +1,5 @@
 package no4gift.opgg.domain;
 
-import java.sql.Date;
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +9,12 @@ import lombok.Setter;
 @Setter
 public class saveData {
     private Long gameId;
-    private Date gameCreation;
+    private String gameCreation;
     private String title;
     private String name;
-    private Integer K;
-    private Integer D;
-    private Integer A;
-    private String champ;
+    private Integer champK;
+    private Integer champD;
+    private Integer champA;
+    private String champName;
     private String victory;
 }

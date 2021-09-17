@@ -2,7 +2,7 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 4
-    url: jdbc:mariadb://3.36.67.156/opgg?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mariadb://15.165.19.56/spr1?characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: wnddkdwjdqhcjfl1
