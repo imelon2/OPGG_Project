@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OpggApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/wonhyeok");
+		// System.setProperty("server.servlet.context-path", "/wonhyeok");
 		SpringApplication.run(OpggApplication.class, args);
 	}
 

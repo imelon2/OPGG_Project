@@ -15,10 +15,10 @@ const Navbar = () => {
   return (
     <nav onMouseOver={navbarOnAnimation} onMouseOut={navbarOutAnimation}>
       <div className="nav1">
-        <Link to="/wonhyeok">SearchGame</Link>
+        <Link to="/">SearchGame</Link>
       </div>
       <div className="nav2">
-        <Link to="/wonhyeok/SearchCustomGame">Search Custom Game</Link>
+        <Link to="/SearchCustomGame">Search Custom Game</Link>
       </div>
       <div className="nav3">MyCustom Game Info</div>
       <div className="nav4">Players Info</div>

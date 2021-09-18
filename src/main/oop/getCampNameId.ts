@@ -11,25 +11,14 @@ export class getCampNameId {
           };
           
           $.ajax(settings).done(function (response) {
-              let _champName  =[] ;
-              let _champId  = [] ;
-            for(let key in response.data) {
-                _champName.push(response.data[key].name);
-                _champId.push(response.data[key].key);  
-
-            }
-            console.log(_champName[0]);
-            console.log(_champId[0]);
-            
-
             const arr = [];
-            for(let i = 0; i < _champName.length; i++) {
-                let item = { champName : String, champId : Number }
-                item.champName = _champName[i];
-                item.champId = _champId[i];
-                arr.push(item);
+            for(let key in response.data) {
+                let items = {
+                    champName : response.data[key].name,
+                    champId : response.data[key].key
+                } 
+                arr.push(items);
             }
-
 
             $.ajax({
                 type: "post",

@@ -27,7 +27,6 @@ server:
   tomcat:
     uri-encoding: UTF-8
   servlet:
-    context-path: /wonhyeok
     session:
       timeout: 3600s
       cookie:

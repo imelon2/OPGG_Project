@@ -20,10 +20,10 @@ class MainPage extends React.Component<HelloProps, {}> {
           <section className="center">
             <div className="background">
               <Switch>
-                <Route exact path="/wonhyeok">
+                <Route exact path="/">
                   <SearchGame />
                 </Route>
-                <Route path="/wonhyeok/SearchCustomGame">
+                <Route path="/SearchCustomGame">
                   <SearchCustomGame />
                 </Route>
               </Switch>

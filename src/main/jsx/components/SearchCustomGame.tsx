@@ -20,6 +20,7 @@ const SearchCustomGame = () => {
 
   const _getGameData = (event: any) => {
     event.preventDefault(event);
+    $(".totalPlayers").css("opacity", "0");
     $(".participant").val("");
     //  게임ID가져오기
     const gameID: number = inputRef.current.value;
