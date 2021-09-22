@@ -30,50 +30,50 @@ const PlayerList = (props: any) => {
       }
 
       //챔피언 영어이름 갖고오기
-      getCampNameFromId(list).then(function (champNameList: []) {
-        for (let i = 0; i < 10; i++) {
-          let participant = $("#participant" + i).val();
+      // getCampNameFromId(list).then(function (champNameList: []) {
+      //   for (let i = 0; i < 10; i++) {
+      //     let participant = $("#participant" + i).val();
 
-          let date = new Date(champDate[i].gameCreation);
-          let year = date.getFullYear();
-          let month = ("0" + (date.getMonth() + 1)).slice(-2);
-          let day = ("0" + date.getDate()).slice(-2);
-          let hours = ("0" + date.getHours()).slice(-2);
-          let minutes = ("0" + date.getMinutes()).slice(-2);
-          let seconds = ("0" + date.getSeconds()).slice(-2);
+      //     let date = new Date(champDate[i].gameCreation);
+      //     let year = date.getFullYear();
+      //     let month = ("0" + (date.getMonth() + 1)).slice(-2);
+      //     let day = ("0" + date.getDate()).slice(-2);
+      //     let hours = ("0" + date.getHours()).slice(-2);
+      //     let minutes = ("0" + date.getMinutes()).slice(-2);
+      //     let seconds = ("0" + date.getSeconds()).slice(-2);
 
-          let timeString =
-            year +
-            "-" +
-            month +
-            "-" +
-            day +
-            "::" +
-            hours +
-            ":" +
-            minutes +
-            ":" +
-            seconds;
+      //     let timeString =
+      //       year +
+      //       "-" +
+      //       month +
+      //       "-" +
+      //       day +
+      //       "::" +
+      //       hours +
+      //       ":" +
+      //       minutes +
+      //       ":" +
+      //       seconds;
 
-          let _saveData = {
-            gameId: champDate[i].gameId,
-            gameCreation: timeString,
-            title: title,
-            name: participant,
-            champK: champDate[i].champK,
-            champD: champDate[i].champD,
-            champA: champDate[i].champA,
-            champName: champNameList[i],
-            victory: champDate[i].win ? "승" : "패",
-          };
-          saveDataList.push(_saveData);
-        }
+      //     let _saveData = {
+      //       gameId: champDate[i].gameId,
+      //       gameCreation: timeString,
+      //       title: title,
+      //       name: participant,
+      //       champK: champDate[i].champK,
+      //       champD: champDate[i].champD,
+      //       champA: champDate[i].champA,
+      //       champName: champNameList[i],
+      //       victory: champDate[i].win ? "승" : "패",
+      //     };
+      //     saveDataList.push(_saveData);
+      //   }
 
-        // 데이터 저장
-        saveDataAjax(saveDataList).then((message) => {
-          alert(message);
-        });
-      });
+      //   // 데이터 저장
+      //   saveDataAjax(saveDataList).then((message) => {
+      //     alert(message);
+      //   });
+      // });
     } else {
       alert("플레이어와 제목을 입력해주세요.");
     }

@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SearchCustomGame from "./components/SearchCustomGame";
 import SearchGame from "./components/SearchGame";
-import { GameInfoDetail } from "./GameInfoDetail";
+import Manage from "./components/Manage";
 
 export interface HelloProps {
   compiler: string;
@@ -18,6 +18,7 @@ class MainPage extends React.Component<HelloProps, {}> {
       <BrowserRouter>
         <>
           <Navbar />
+          <Manage />
           <section className="center">
             <div className="background">
               <Switch>

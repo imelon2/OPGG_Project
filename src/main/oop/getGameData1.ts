@@ -5,18 +5,42 @@
 import { any } from "prop-types";
 
 //
-export function getGameData1(gameID : number) {    
-             let data;  
+export function getGameData1(gameID : number, accountId : number) {    
+            let data;  
 
             $.ajax({
                 type: 'GET',
-                url : "https://kr.api.riotgames.com/lol/match/v4/matches/"+gameID+"?api_key=RGAPI-9ea370e2-4d4b-4ab4-840e-44a33bd87b3a",
+                url : "https://kr.api.riotgames.com/lol/match/v4/matches/"+gameID+"?api_key=RGAPI-984bbde3-46c6-43f3-8543-d0ad70aecd2d",
                 async : false,
                 success : function(response) {
+
+                    // 선형 알고리즘
+                    let LinearSearchArr:any =[];
+                    let participantId ;
+                    for(let i =0; i < response.participantIdentities.length ; i++) {
+                        let data = {
+                            participantId : response.participantIdentities[i].participantId,
+                            accountId : response.participantIdentities[i].player.accountId
+                        }
+                        LinearSearchArr.push(data)
+                    }
+
+                    for(let i = 0 ; i < LinearSearchArr.length; i++){
+                        if(LinearSearchArr[i].accountId == accountId) {
+                            participantId = LinearSearchArr[i].participantId
+                        }
+                    }
+
+                    console.log(participantId);
+                    
+
+
+
                     let gameData = {
                         gameId : response.gameId, 
                         gameCreation :  response.gameCreation, 
                         gameType :response.gameType,
+                        queueId : response.queueId,
                         teams : 
                         [{
                                 teamId : response.teams[0].teamId,
@@ -28,47 +52,19 @@ export function getGameData1(gameID : number) {
                                 bans : new Array()
                         }],
                         participantGameData : new Array(),
-                        participantInfo : {
-                            player1Name : response.participantIdentities[0].player.summonerName,
-                            player2Name : response.participantIdentities[1].player.summonerName,
-                            player3Name : response.participantIdentities[2].player.summonerName,
-                            player4Name : response.participantIdentities[3].player.summonerName,
-                            player5Name : response.participantIdentities[4].player.summonerName,
-                            player6Name : response.participantIdentities[5].player.summonerName,
-                            player7Name : response.participantIdentities[6].player.summonerName,
-                            player8Name : response.participantIdentities[7].player.summonerName,
-                            player9Name : response.participantIdentities[8].player.summonerName,
-                            player10Name : response.participantIdentities[9].player.summonerName,
-                        }
+                        participantInfo : new Array()
                 }
+
+                        // 참가자 정보
+                        for(let i = 0 ; i < response.participantIdentities.length ; i++) {
+                            gameData.participantInfo.push(response.participantIdentities[i].player.summonerName)
+                        }
     
-    
-                    // gameData.gameId = response.gameId,
-                    // gameData.gameCreation = response.gameCreation,
-                    // gameData.gameType = response.gameType,
-                    // gameData.teams[0].teamId= response.teams[0].teamId,
-                    // gameData.teams[0].win = response.teams[0].win
-                    // gameData.teams[0].bans = new Array()
-                    // gameData.teams[1].teamId= response.teams[1].teamId,
-                    // gameData.teams[1].win = response.teams[1].win
-                    // gameData.teams[1].bans = new Array()
-    
-                    // gameData.participantGameData = new Array() ,
-                    // gameData.participantInfo.player1Name =  response.participantIdentities[0].player.summonerName
-                    // gameData.participantInfo.player2Name =  response.participantIdentities[1].player.summonerName
-                    // gameData.participantInfo.player3Name =  response.participantIdentities[2].player.summonerName
-                    // gameData.participantInfo.player4Name =  response.participantIdentities[3].player.summonerName
-                    // gameData.participantInfo.player5Name =  response.participantIdentities[4].player.summonerName
-                    // gameData.participantInfo.player6Name =  response.participantIdentities[5].player.summonerName
-                    // gameData.participantInfo.player7Name =  response.participantIdentities[6].player.summonerName
-                    // gameData.participantInfo.player8Name =  response.participantIdentities[7].player.summonerName
-                    // gameData.participantInfo.player9Name =  response.participantIdentities[8].player.summonerName
-                    // gameData.participantInfo.player10Name =  response.participantIdentities[9].player.summonerName
     
                         //팀1 벤챔프
                         for (let i = 0; i < response.teams[0].bans.length; i++) {
                             let _ban1 = {
-                                teamBanChampId : response.teams[0].bans[i].championId
+                                teamBanChampId : response.teams[0].bans[i].championId ? response.teams[0].bans[i].championId : "noBan"
                             }
                             gameData.teams[0].bans[i] =_ban1;
                         }
@@ -76,7 +72,7 @@ export function getGameData1(gameID : number) {
                         //팀2 벤챔프
                         for (let i = 0; i < response.teams[1].bans.length; i++) {
                             let _ban2 = {
-                                teamBanChampId : response.teams[1].bans[i].championId
+                                teamBanChampId : response.teams[1].bans[i].championId ? response.teams[1].bans[i].championId : "noBan"
                             }
                             gameData.teams[1].bans[i] =_ban2;
                         }

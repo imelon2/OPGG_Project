@@ -24,22 +24,31 @@ const SearchGame = () => {
 
     // getUserInfo.ts
     getUserInfo(searchId).then((userInfo: any) => {
+      if (userInfo == false) {
+        setState(false);
+        setIconState(false);
+      }
       // getGamListFromAccountId.ts
-      getGamListFromAccountId(userInfo.accountId).then((matchList: any[]) => {
-        //게임Id 리스트 10개
-        let matchListArr: number[] = [];
-        for (let i = 0; i < 10; i++) {
-          matchListArr.push(matchList[i].gameId);
+      getGamListFromAccountId(userInfo.accountId).then((data: any) => {
+        //게임Id 리스트 8개
+        let matchListArr: any = [];
+        for (let i = 0; i < 8; i++) {
+          let _data = {
+            accountId: data.accountId,
+            gameIdList: data.matches[i].gameId,
+          };
+          matchListArr.push(_data);
         }
 
         //게임정보 list
         let Arr: any[] = [];
-        for (let i = 0; i < 10; i++) {
-          let a = getGameData1(matchListArr[i]);
+        for (let i = 0; i < matchListArr.length; i++) {
+          let a = getGameData1(
+            matchListArr[i].gameIdList,
+            matchListArr[i].accountId
+          );
           Arr.push(a);
         }
-
-        console.log(Arr);
         setGameDataArr(Arr);
         setIconState(false);
       });
@@ -53,8 +62,8 @@ const SearchGame = () => {
     if (props.displayState) {
       return (
         <>
-          {gameDataArr.map((list, index) => (
-            <SearchDataList list={list} key={index} />
+          {gameDataArr.map((list) => (
+            <SearchDataList key={list.gameId} list={list} />
           ))}
           <button>더보기</button>
         </>
@@ -82,8 +91,10 @@ const SearchGame = () => {
           <IconMotion />
           <button onClick={SearchUserData}>.GG</button>
         </div>
-        <div className="gameData">
-          <GameData displayState={state}></GameData>
+        <div className="gameData-BackGround">
+          <div className="gameData">
+            <GameData displayState={state}></GameData>
+          </div>
         </div>
       </section>
       <GameInfoDetail />

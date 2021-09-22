@@ -23,7 +23,7 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public List<String> getChampNamelistFromId(ArrayList<Integer> vo) {
+    public List<ChampListVO> getChampNamelistFromId(ArrayList<Integer> vo) {
 
         return mapper.getChampNamelistFromId(vo);
 
@@ -39,6 +39,12 @@ public class MyServiceImpl implements MyService {
     public Long checkDup(Long id) {
 
         return mapper.checkDup(id);
+    }
+
+    @Override
+    public void modifyChampList() {
+        mapper.modifyChampList();
+
     }
 
 }

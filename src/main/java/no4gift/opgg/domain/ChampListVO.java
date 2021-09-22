@@ -11,4 +11,5 @@ public class ChampListVO {
 
     private int champId;
     private String champName;
+    private String champNameKR;
 }

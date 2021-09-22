@@ -5,15 +5,15 @@
 
     <insert id="updateChampList" parameterType="java.util.List">
         INSERT INTO champList
-        (champName , champId)
+        (champName , champId, champNameKR)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            ( #{item.champName}, #{item.champId})
+            ( #{item.champName}, #{item.champId} , #{item.champNameKR})
         </foreach>
     </insert>
 
-    <select id="getChampNamelistFromId" parameterType="list" resultType="string">
-        SELECT champName
+    <select id="getChampNamelistFromId" parameterType="list" resultType="no4gift.opgg.domain.ChampListVO">
+        SELECT champName,champNameKR, champId
         FROM champList
         WHERE champId in
         <foreach collection="list" item="item" separator="," open="(" close=")">
@@ -41,5 +41,9 @@
         WHERE gameId = #{id}
         Limit 1
     </select>
+
+    <delete id="modifyChampList">
+        DELETE FROM champList
+    </delete>
 
 </mapper>

@@ -10,10 +10,12 @@ public interface MyService {
 
     void updateChampList(ArrayList<ChampListVO> vo);
 
-    List<String> getChampNamelistFromId(ArrayList<Integer> vo);
+    List<ChampListVO> getChampNamelistFromId(ArrayList<Integer> vo);
 
     void saveData(ArrayList<saveData> vo);
 
     Long checkDup(Long id);
+
+    void modifyChampList();
 
 }

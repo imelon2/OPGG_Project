@@ -53,14 +53,14 @@ const SearchCustomGame = () => {
         playerDataList.push(_champData);
       }
       // 챔프id -> 챔프영어이름
-      getCampNameFromId(champIdList).then((data: any[]) => {
-        let champReg = new champNameReturnReg();
-        //정규화된 챔프이름[] 리턴
-        let champUrl = champReg.champNameReturnRegUrl(data);
+      getCampNameFromId(champIdList);
+      let champReg = new champNameReturnReg();
+      //정규화된 챔프이름[] 리턴
+      let champUrl = champReg.champNameReturnRegUrl(data);
 
-        // 챔프 이미지 보여주기
-        setChampImgUrl(champUrl);
-      });
+      // 챔프 이미지 보여주기
+      setChampImgUrl(champUrl);
+
       //플레이어 KDA보여주기
       console.log(playerDataList);
 

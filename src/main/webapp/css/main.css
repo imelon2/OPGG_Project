@@ -27,7 +27,7 @@ a:active {
     text-decoration: none;
 }
 
-.fas {
+.searchBar .fas {
     animation: rotate_image 2s linear infinite;
 }
 @keyframes rotate_image{
@@ -94,6 +94,27 @@ nav>div {
 }
 nav .nav1 {
     margin-left: 7%;
+}
+
+/* Manage bar */
+.Manage {
+    position: absolute;
+    width: 100px;
+    height: 300px;
+    background-color: #555;
+    top: 50px;
+    left: -60px;
+    transition: all 0.5s;
+    border-radius: 0px 40px 40px 0px;
+}
+.Manage:hover {
+    transform: translateX(50px);
+}
+.Manage p {
+    font-size: 40px;
+    position: relative;
+    top: 20px;
+    left: 20px;
 }
 
 /* Section Center Nav */
@@ -448,7 +469,7 @@ section .background .gameStats {
     background-color: #E5E7F0;
     border-radius: 35px;
     position: relative;
-    top: 50px;
+    top: 30px;
 }
 .searchBar input {
     border: none;
@@ -471,21 +492,35 @@ section .background .gameStats {
     font-size: 17px;
     border-radius: 5px;
 }
+.gameData-BackGround {
+    position: relative;
+    width: 850px;
+    height: 650px;
+    margin: 0 auto;
+    top: 60px;
+    background-color: rgba(247,247,247,0.3);
+    border-radius: 35px;
+}
 .gameData {
-    top: 100px;
-    width: 700px;
+    width: 810px;
     height: 600px;
     margin: 0 auto;
     display: block;
     position: relative;
     overflow: overlay;
+    padding-top: 20px;
 }
 /* 게임리스트 항목 css */
 .gameDataList {
-    width: 690px;
+    width: 770px;
     height: 100px;
     margin: 10px auto;
     border: 1px solid;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+.gameDataList:hover {
+    transform: scale(1.03);
 }
 .GameStats {
     float: left;
@@ -495,7 +530,12 @@ section .background .gameStats {
     color: #555;
     line-height: 16px;
     padding-top: 17px;
-    padding-left: 9px;
+    margin-left: 12px;
+}
+.GameStats .bar {
+    border: 1px solid;
+    width: 35px;
+    margin: 5px auto;
 }
 .gameType {
     font-weight: bold;
@@ -509,8 +549,10 @@ section .background .gameStats {
 }
 .gameSettingInfo{
     float: left;
-    width: 100px;
+    width: 120px;
     font-size: 0;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 .champImage {
     display: inline-block;
@@ -526,6 +568,169 @@ section .background .gameStats {
     height: 100%;
     background: #000;
 }
+.summonerSpell {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.spell img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.runes .rune-S {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    right: 6px;
+}
+.runes .rune {
+    width: 22px;
+    height: 22px;
+}
+.runes img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.champName {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.KDA {
+    float: left;
+    width: 96px;
+    height: auto;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 3.5%;
+    border: 1px 1px solid;
+    border-right: 2px solid #555e5e;;
+    border-left: 2px solid #555e5e;
+}
+
+.KDA ._KDA {
+    width: 100%;
+    height: auto;
+    color: #555;
+    font-size: 18px;
+    white-space: nowrap;
+}
+.KDARatio {
+    color: #555e5e;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.Stats {
+    float: left;
+    width: 90px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #555e5e;
+    margin-top: 2%;
+}
+.Items {
+    float: left;
+    width: 110px;
+    height: auto;
+    margin-left: 1%;
+    margin-top: 2.5%;
+}
+.Items .ItemList {
+    width: 100%;
+    margin: 0 auto;
+}
+.Items .ItemList .Item {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+}
+.Items .ItemList .Item img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.Players {
+    width: 240px;
+    font-size: 0;
+    float: left;
+    margin-top: 4px;
+}
+.Players .Team {
+    float: left;
+    width: 48%;
+    margin-right: 2%;
+}
+.Players .Team .Summoner {
+    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+.Players .Team .Summoner .ChampImg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.Players .Team .Summoner .chmapNameKR {
+    position: absolute;
+    margin-top: -25px;
+    margin-left: -8px;
+    z-index: 1;
+    font-size: 9px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+.Players .Team .Summoner .ChampImg img {
+    background-position: 0px -1712px;
+    width: 16px;
+    height: 16px;
+}
+.Players .Team .Summoner .SummonerName{
+    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #555;
+}
+
 /* gameInfoDetail */
 .gameInfoDetail {
     position: absolute;

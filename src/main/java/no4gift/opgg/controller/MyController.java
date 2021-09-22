@@ -36,12 +36,15 @@ public class MyController {
     @PostMapping(value = "/update/champList", produces = { "application/json; charset=utf-8" })
     @ResponseBody
     public void updateChampList(@RequestBody ArrayList<ChampListVO> vo) {
+        // 기존 데이터 삭제
+        service.modifyChampList();
+        // 새로운 데이터 업데이트
         service.updateChampList(vo);
     }
 
     @PostMapping(value = "/getdata/champNameList", produces = { "application/json; charset=utf-8" })
     @ResponseBody
-    public List<String> getChampNamelistFromId(@RequestBody ArrayList<Integer> vo) {
+    public List<ChampListVO> getChampNamelistFromId(@RequestBody ArrayList<Integer> vo) {
         return service.getChampNamelistFromId(vo);
     }
 

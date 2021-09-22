@@ -20,13 +20,19 @@ export class champNameReturnReg {
 }
 
     champNameReturnRegString(data:string[])  {
-        const reg = /[ \.]/gi ;
+        const reg = /[ \.\']/gi ;
 
         let champUrl : string[] = [];
         for (let i =0;i < data.length; i++){
             let spaceReq = data[i];
-            let champCleanN = spaceReq.replace(reg, '')
-            champUrl.push(champCleanN);
+            let champCleanN : string = spaceReq.replace(reg, '')
+            // console.log(champCleanN);
+            let front = champCleanN.charAt(0);
+            let behind = champCleanN.slice(1).toLowerCase();
+            let result = front+behind
+            console.log(result);
+            
+            champUrl.push(result);
         }
         return champUrl;
 
