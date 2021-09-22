@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SearchCustomGame from "./components/SearchCustomGame";
 import SearchGame from "./components/SearchGame";
+import { GameInfoDetail } from "./GameInfoDetail";
 
 export interface HelloProps {
   compiler: string;

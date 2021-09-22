@@ -2,31 +2,60 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import SearchDataList from "./searchDataList/SearchDataList";
-import { getUserData } from "../../oop/getUserData";
-import { getGameDataListFromUserId } from "../../oop/getGameDataListFromUserId";
+import { getGamListFromAccountId } from "../../oop/getGamListFromAccountId";
 import { undateSpellList } from "../../oop/updateSpellList";
 import { getGameData1 } from "../../oop/getGameData1";
+import { getUserInfo } from "../../oop/getUserInfo";
+import { GameInfoDetail } from "../GameInfoDetail";
 
 const SearchGame = () => {
-  const [state, setState] = React.useState<any>(true);
+  const [iconState, setIconState] = React.useState<any>(false);
+  const [state, setState] = React.useState<any>();
+  const [gameDataArr, setGameDataArr] = React.useState<any[]>([]);
 
-  function searchUserData() {
-    undateSpellList();
-    getGameData1(5448600347);
-    // // 유저 AccountId 가져오기
-    // getUserData($("#playerNameSearchBar").val()).then((userId: string) => {
-    //   //게임 리스트 가져오기
-    //   getGameDataListFromUserId(userId);
-    // });
-
-    // $("#playerNameSearchBar").val() ? setState(true) : setState(false);
+  function IconMotion() {
+    return iconState ? <i className="fas fa-spinner"></i> : <></>;
   }
 
-  function UserButton(props: any) {
+  function SearchUserData() {
+    //로딩모션
+    setIconState(true);
+    let searchId = $("#playerNameSearchBar").val();
+
+    // getUserInfo.ts
+    getUserInfo(searchId).then((userInfo: any) => {
+      // getGamListFromAccountId.ts
+      getGamListFromAccountId(userInfo.accountId).then((matchList: any[]) => {
+        //게임Id 리스트 10개
+        let matchListArr: number[] = [];
+        for (let i = 0; i < 10; i++) {
+          matchListArr.push(matchList[i].gameId);
+        }
+
+        //게임정보 list
+        let Arr: any[] = [];
+        for (let i = 0; i < 10; i++) {
+          let a = getGameData1(matchListArr[i]);
+          Arr.push(a);
+        }
+
+        console.log(Arr);
+        setGameDataArr(Arr);
+        setIconState(false);
+      });
+    });
+
+    $("#playerNameSearchBar").val() ? setState(true) : setState(false);
+    // -------------------retrun----------------------
+  }
+
+  function GameData(props: any) {
     if (props.displayState) {
       return (
         <>
-          <SearchDataList />
+          {gameDataArr.map((list, index) => (
+            <SearchDataList list={list} key={index} />
+          ))}
           <button>더보기</button>
         </>
       );
@@ -50,12 +79,14 @@ const SearchGame = () => {
             type="text"
             placeholder="소환사명..."
           />
-          <button onClick={searchUserData}>.GG</button>
+          <IconMotion />
+          <button onClick={SearchUserData}>.GG</button>
         </div>
-        <div className="gameDataList">
-          <UserButton displayState={state}></UserButton>
+        <div className="gameData">
+          <GameData displayState={state}></GameData>
         </div>
       </section>
+      <GameInfoDetail />
     </>
   );
 };

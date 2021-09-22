@@ -17,8 +17,6 @@ const PlayerList = (props: any) => {
     champDate.push(props.champData[key]);
   }
 
-  console.log(champDate);
-
   function saveDataFn(title: any) {
     //유저명 + 타이틀명 예외처리
     if (count > 9 && title) {

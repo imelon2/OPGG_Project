@@ -7,6 +7,9 @@
     font-style: normal;
 }
 
+::-webkit-scrollbar {
+    display: none;
+  }
 a:link {
     color: black;
     text-decoration: none;
@@ -22,6 +25,15 @@ a:hover {
 a:active {
     color: black;
     text-decoration: none;
+}
+
+.fas {
+    animation: rotate_image 2s linear infinite;
+}
+@keyframes rotate_image{
+	100% {
+    	transform: rotate(360deg);
+    }
 }
 
 * {
@@ -442,7 +454,7 @@ section .background .gameStats {
     border: none;
     background: none;
     height: 100%;
-    width: 50%;
+    width: 60%;
     outline: none;
     font-size: 15px;
     text-align: left;
@@ -452,20 +464,74 @@ section .background .gameStats {
 .searchBar button {
     width: 50px;
     height: 30px;
-    margin-left: 15%;
+    margin-left: 5%;
     color: white;
     border: none;
     background: #36B9F5;
     font-size: 17px;
     border-radius: 5px;
 }
-
-.gameDataList {
+.gameData {
     top: 100px;
-    width: 690px;
-    height: 100px;
+    width: 700px;
+    height: 600px;
     margin: 0 auto;
     display: block;
     position: relative;
+    overflow: overlay;
+}
+/* 게임리스트 항목 css */
+.gameDataList {
+    width: 690px;
+    height: 100px;
+    margin: 10px auto;
     border: 1px solid;
+}
+.GameStats {
+    float: left;
+    width: 80px;
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+    line-height: 16px;
+    padding-top: 17px;
+    padding-left: 9px;
+}
+.gameType {
+    font-weight: bold;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.gameResult {
+    font-weight: bold;
+}
+.gameSettingInfo{
+    float: left;
+    width: 100px;
+    font-size: 0;
+}
+.champImage {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.champImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+/* gameInfoDetail */
+.gameInfoDetail {
+    position: absolute;
+    top: 0px;
+    float: left;
+    width: 100%;
+    height: 800px;
+    display: none;
 }

@@ -1,4 +1,8 @@
 
+//
+//챔프 이미지를 호출하는 URL의 챔프이름에 특수 or 공백이 있으면 안되서
+//챔프이름을 정규화해서 URL을 호출하는 API
+//
 export class champNameReturnReg {
 
     champNameReturnRegUrl(data:string[])  {

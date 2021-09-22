@@ -62,6 +62,8 @@ const SearchCustomGame = () => {
         setChampImgUrl(champUrl);
       });
       //플레이어 KDA보여주기
+      console.log(playerDataList);
+
       setChampData(playerDataList);
 
       // 딜그래프 전환

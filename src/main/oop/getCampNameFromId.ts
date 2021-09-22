@@ -1,4 +1,6 @@
-
+//
+//챔프ID를 챔프영어 이름으로 호출하는 API
+//
 export function getCampNameFromId(champIdList : Number|String[]) {
 
     return new Promise(function(resolve, reject)  {
