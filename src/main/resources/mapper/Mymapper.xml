@@ -12,6 +12,24 @@
         </foreach>
     </insert>
 
+    <insert id="getspellList" parameterType="java.util.List">
+        INSERT INTO spellList
+        (spellId , spellName)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            ( #{item.spellId}, #{item.spellName})
+        </foreach>
+    </insert>
+
+    <insert id="getruneList" parameterType="java.util.List">
+        INSERT INTO runeList
+        (runeId , runeName, runeIcon)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            ( #{item.Id}, #{item.name}, #{item.icon})
+        </foreach>
+    </insert>
+
     <select id="getChampNamelistFromId" parameterType="list" resultType="no4gift.opgg.domain.ChampListVO">
         SELECT champName,champNameKR, champId
         FROM champList
@@ -20,6 +38,34 @@
             #{item}
         </foreach>
         ORDER BY field (champId,
+        <foreach collection="list" item="item" separator=",">
+             #{item} 
+        </foreach>
+        )
+    </select>
+
+    <select id="getSpellNameFromId" parameterType="list" resultType="string">
+        SELECT spellName
+        FROM spellList
+        WHERE spellId in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        ORDER BY field (spellId,
+        <foreach collection="list" item="item" separator=",">
+             #{item} 
+        </foreach>
+        )
+    </select>
+
+    <select id="getRuneNameFromId" parameterType="list" resultType="string">
+        SELECT runeIcon
+        FROM runeList
+        WHERE runeId in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        ORDER BY field (runeId,
         <foreach collection="list" item="item" separator=",">
              #{item} 
         </foreach>
@@ -44,6 +90,14 @@
 
     <delete id="modifyChampList">
         DELETE FROM champList
+    </delete>
+
+    <delete id="modifySpellList">
+        DELETE FROM spellList
+    </delete>
+
+    <delete id="modifyRuneList">
+        DELETE FROM runeList
     </delete>
 
 </mapper>

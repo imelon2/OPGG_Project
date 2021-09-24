@@ -16,6 +16,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import no4gift.opgg.domain.ChampIdAndNameVO;
 import no4gift.opgg.domain.ChampListVO;
+import no4gift.opgg.domain.RuneListVO;
+import no4gift.opgg.domain.SpellListVO;
 import no4gift.opgg.domain.saveData;
 import no4gift.opgg.service.MyService;
 
@@ -42,10 +44,40 @@ public class MyController {
         service.updateChampList(vo);
     }
 
+    @PostMapping(value = "/update/spellList", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public void getspellList(@RequestBody ArrayList<SpellListVO> vo) {
+        // 기존 데이터 삭제
+        service.modifySpellList();
+        // 새로운 데이터 업데이트
+        service.getspellList(vo);
+    }
+
+    @PostMapping(value = "/update/runeList", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public void getruneList(@RequestBody ArrayList<RuneListVO> vo) {
+        // 기존 데이터 삭제
+        service.modifyRuneList();
+        // 새로운 데이터 업데이트
+        service.getruneList(vo);
+    }
+
     @PostMapping(value = "/getdata/champNameList", produces = { "application/json; charset=utf-8" })
     @ResponseBody
     public List<ChampListVO> getChampNamelistFromId(@RequestBody ArrayList<Integer> vo) {
         return service.getChampNamelistFromId(vo);
+    }
+
+    @PostMapping(value = "/getdata/spellName", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public List<String> getSpellNameFromId(@RequestBody ArrayList<Integer> vo) {
+        return service.getSpellNameFromId(vo);
+    }
+
+    @PostMapping(value = "/getdata/runeName", produces = { "application/json; charset=utf-8" })
+    @ResponseBody
+    public List<String> getRuneNameFromId(@RequestBody ArrayList<Integer> vo) {
+        return service.getRuneNameFromId(vo);
     }
 
     @PostMapping(value = "/getdata/saveData", produces = { "application/json; charset=utf-8" })

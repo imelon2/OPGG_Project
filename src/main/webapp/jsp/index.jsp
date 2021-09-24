@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Hello React!</title>
+        <title>OP.GG</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://kit.fontawesome.com/50f3288b9a.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./css/main.css">

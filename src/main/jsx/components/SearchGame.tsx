@@ -12,7 +12,9 @@ const SearchGame = () => {
   const [iconState, setIconState] = React.useState<any>(false);
   const [state, setState] = React.useState<any>();
   const [gameDataArr, setGameDataArr] = React.useState<any[]>([]);
+  const [index, setIndex] = React.useState<number>();
 
+  //로딩 아이콘 진행시 : 미진행시
   function IconMotion() {
     return iconState ? <i className="fas fa-spinner"></i> : <></>;
   }
@@ -32,7 +34,7 @@ const SearchGame = () => {
       getGamListFromAccountId(userInfo.accountId).then((data: any) => {
         //게임Id 리스트 8개
         let matchListArr: any = [];
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 6; i++) {
           let _data = {
             accountId: data.accountId,
             gameIdList: data.matches[i].gameId,
@@ -55,15 +57,20 @@ const SearchGame = () => {
     });
 
     $("#playerNameSearchBar").val() ? setState(true) : setState(false);
-    // -------------------retrun----------------------
   }
 
+  // 검색 후 자료 보여주기
   function GameData(props: any) {
     if (props.displayState) {
       return (
         <>
-          {gameDataArr.map((list) => (
-            <SearchDataList key={list.gameId} list={list} />
+          {gameDataArr.map((list, index) => (
+            <SearchDataList
+              key={list.gameId}
+              index={index}
+              list={list}
+              getListIndex={getListIndex}
+            />
           ))}
           <button>더보기</button>
         </>
@@ -78,7 +85,25 @@ const SearchGame = () => {
     }
     return <></>;
   }
+  const [gameInfoDetailviewState, setGameInfoDetailviewState] =
+    React.useState<boolean>(false);
 
+  function getListIndex(num?: number) {
+    setIndex(num);
+    setGameInfoDetailviewState(true);
+  }
+
+  function view() {
+    setGameInfoDetailviewState(false);
+  }
+
+  function GameInfoDetailview() {
+    return gameInfoDetailviewState ? (
+      <GameInfoDetail view={view} gameData={gameDataArr[index]} />
+    ) : (
+      <></>
+    );
+  }
   return (
     <>
       <section className="searchGame">
@@ -97,7 +122,7 @@ const SearchGame = () => {
           </div>
         </div>
       </section>
-      <GameInfoDetail />
+      <GameInfoDetailview />
     </>
   );
 };
