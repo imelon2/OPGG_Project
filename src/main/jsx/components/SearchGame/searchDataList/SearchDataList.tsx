@@ -2,12 +2,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import { Link } from "react-router-dom";
-import { GameInfoDetail } from "../../GameInfoDetail";
-import { getCampNameFromId } from "../../../oop/getCampNameFromId";
-import { champNameReturnReg } from "../../../oop/champNameReturnReg";
-import { getSpellNameFromId } from "../../../oop/getSpellNameFromId";
-import { getRuneNameFromId } from "../../../oop/getRuneNameFromId";
-import { dateTypeRef } from "../../../oop/dateTypeRef";
+import { GameInfoDetail } from "../GameInfoDetail/GameInfoDetail";
+import { getCampNameFromId } from "../../../../oop/getCampNameFromId";
+import { champNameReturnReg } from "../../../../oop/champNameReturnReg";
+import { getSpellNameFromId } from "../../../../oop/getSpellNameFromId";
+import { getRuneNameFromId } from "../../../../oop/getRuneNameFromId";
+import { dateTypeRef } from "../../../../oop/dateTypeRef";
 
 const SearchDataList = (props: any) => {
   // GameInfoDetail 에 index넘겨죽;

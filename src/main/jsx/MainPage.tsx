@@ -4,7 +4,7 @@ import * as $ from "jquery";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SearchCustomGame from "./components/SearchCustomGame";
-import SearchGame from "./components/SearchGame";
+import SearchGame from "./components/SearchGame/SearchGame";
 import Manage from "./components/Manage";
 
 export interface HelloProps {

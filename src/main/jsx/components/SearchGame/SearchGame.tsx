@@ -2,11 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import SearchDataList from "./searchDataList/SearchDataList";
-import { getGamListFromAccountId } from "../../oop/getGamListFromAccountId";
-import { undateSpellList } from "../../oop/updateSpellList";
-import { getGameData1 } from "../../oop/getGameData1";
-import { getUserInfo } from "../../oop/getUserInfo";
-import { GameInfoDetail } from "../GameInfoDetail";
+import { getGamListFromAccountId } from "../../../oop/getGamListFromAccountId";
+import { undateSpellList } from "../../../oop/updateSpellList";
+import { getGameData1 } from "../../../oop/getGameData1";
+import { getUserInfo } from "../../../oop/getUserInfo";
+import { GameInfoDetail } from "./GameInfoDetail/GameInfoDetail";
 
 const SearchGame = () => {
   const [iconState, setIconState] = React.useState<any>(false);
@@ -85,8 +85,10 @@ const SearchGame = () => {
     }
     return <></>;
   }
+
+  // 검색 후 리스트 클릭시 게임정보 디테일 출력 -----------------
   const [gameInfoDetailviewState, setGameInfoDetailviewState] =
-    React.useState<boolean>(false);
+    React.useState<boolean>(true);
 
   function getListIndex(num?: number) {
     setIndex(num);
